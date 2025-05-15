@@ -7,17 +7,36 @@
     <style>
       body {
         margin: 0;
-        background-color: #ccc; /* gray background */
+        background-color: #ccc;
       }
       model-viewer {
         width: 100vw;
         height: 100vh;
-        background-color: #ccc; /* gray viewer background */
+        background-color: #ccc;
+      }
+      #ar-button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 24px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 10;
+        display: none;
+      }
+      model-viewer[ar] + #ar-button {
+        display: block;
       }
     </style>
   </head>
   <body>
     <model-viewer
+      id="modelViewer"
       src="model.glb"
       ios-src="model.usdz"
       alt="3D model"
@@ -28,5 +47,18 @@
       ar-scale="auto"
     >
     </model-viewer>
+
+    <button id="ar-button" onclick="enterAR()">View in AR</button>
+
+    <script>
+      function enterAR() {
+        const viewer = document.getElementById('modelViewer');
+        if (viewer.canActivateAR) {
+          viewer.activateAR();
+        } else {
+          alert("AR not supported on this device/browser.");
+        }
+      }
+    </script>
   </body>
 </html>
