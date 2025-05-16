@@ -2,61 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Casa Encargado - AR Viewer</title>
+    <title>Markerless AR Model</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
       body {
         margin: 0;
-        font-family: 'Inter', sans-serif;
-        background: linear-gradient(135deg, #ece9e6, #ffffff);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
-      }
-
-      header {
-        width: 100%;
-        padding: 12px 20px;
-        text-align: center;
-        background-color: #f8f8f8cc;
-        backdrop-filter: blur(5px);
-        font-weight: 600;
-        font-size: 20px;
-        color: #222;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        z-index: 2;
+        background-color: #f4f4f4;
+        font-family: sans-serif;
       }
 
       model-viewer {
-        width: 100%;
-        height: 100%;
-        background-color: transparent;
+        width: 100vw;
+        height: 100vh;
+        background-color: #eaeaea;
       }
 
       #ar-button {
         position: absolute;
-        bottom: 30px;
+        bottom: 24px;
         left: 50%;
         transform: translateX(-50%);
-        padding: 14px 28px;
-        background: #0073e6;
+        padding: 12px 24px;
+        background-color: #1e1e1e;
         color: white;
-        font-size: 16px;
-        font-weight: 600;
         border: none;
-        border-radius: 12px;
+        border-radius: 8px;
+        font-size: 16px;
         cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 115, 230, 0.3);
-        transition: all 0.3s ease;
         z-index: 10;
         display: none;
-      }
-
-      #ar-button:hover {
-        background-color: #005bb5;
       }
 
       model-viewer[ar] + #ar-button {
@@ -64,21 +38,19 @@
       }
     </style>
   </head>
-
   <body>
-    <header>Casa Encargado - AR Experience</header>
-
     <model-viewer
       id="modelViewer"
       src="model.glb"
       ios-src="model.usdz"
-      alt="3D model"
-      auto-rotate
-      camera-controls
+      alt="Architectural 3D model"
       ar
+      ar-scale="fixed"
       ar-modes="scene-viewer webxr quick-look"
-      ar-scale="auto"
+      camera-controls
+      auto-rotate
       environment-image="neutral"
+      shadow-intensity="1"
     >
     </model-viewer>
 
@@ -90,7 +62,7 @@
         if (viewer.canActivateAR) {
           viewer.activateAR();
         } else {
-          alert("AR not supported on this device/browser.");
+          alert("AR is not supported on this device or browser.");
         }
       }
     </script>
